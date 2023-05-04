@@ -8,25 +8,23 @@ import {CAMERA, CONTAINER, RENDERER, SCENE} from '../services';
 @Service(RENDERER)
 export default class Renderer extends ResizableObject {
     private renderer!: WebGLRenderer;
+
+    @Inject(SCENE)
     private scene!: Scene;
 
     @Inject(CAMERA)
     private camera!: Camera;
-
-    @Inject(CONTAINER)
-    private container!: HTMLElement;
 
     get domElement() {
         return this.renderer.domElement;
     }
 
     async awake(): Promise<void> {
-        this.scene = Container.get(SCENE);
         this.renderer = new WebGLRenderer({antialias: true});
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-        this.container.appendChild(this.renderer.domElement);
+        Container.get(CONTAINER).appendChild(this.renderer.domElement);
     }
 
     update(_deltaTime: number): void {

@@ -4,7 +4,7 @@ import {CAMERA, RENDERER, SCENE, STATS} from '../services';
 
 export default function initializeEngine() {
     const scene = Container.get(SCENE);
-    window.onresize = scene.onResize;
+    window.onresize =  scene.onResize.bind(scene);
 
     const clock = new Clock();
 
