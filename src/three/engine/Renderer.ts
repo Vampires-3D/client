@@ -1,12 +1,12 @@
 import {PMREMGenerator, WebGLRenderer} from 'three';
-import {ResizableObject} from './ResizableObject';
 import Scene from './Scene';
 import Camera from './Camera';
 import {Container, Inject, Service} from 'typedi';
 import {CAMERA, CONTAINER, RENDERER, SCENE} from '../services';
+import {SceneObject} from './SceneObject';
 
 @Service(RENDERER)
-export default class Renderer extends ResizableObject {
+export default class Renderer extends SceneObject {
     private renderer!: WebGLRenderer;
 
     @Inject(SCENE)

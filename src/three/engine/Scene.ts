@@ -3,17 +3,15 @@ import {AnimationMixer, Color, Scene as ThreeScene} from 'three';
 import {RoomEnvironment} from 'three/examples/jsm/environments/RoomEnvironment';
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader';
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader';
-import {ResizableObject} from './ResizableObject';
 import {Container} from 'typedi';
 import {RENDERER} from '../services';
 
-export default class Scene extends ResizableObject {
+export default class Scene extends SceneObject {
     private mixer!: AnimationMixer;
     private scene!: ThreeScene;
 
     private initialized = false;
     private objects: SceneObject[] = [];
-    private resizableObjects: ResizableObject[] = [];
 
     async awake(): Promise<void> {
         for (const object of this.objects) {
@@ -50,6 +48,10 @@ export default class Scene extends ResizableObject {
             await object.start?.();
         }
 
+        for (const object of this.objects) {
+            await this.addSceneObjects(object);
+        }
+
         this.initialized = true;
     }
 
@@ -68,17 +70,28 @@ export default class Scene extends ResizableObject {
         if (this.initialized) {
             await object.awake?.();
             await object.start?.();
+            await this.addSceneObjects(object);
         }
 
         this.objects.push(object);
-        if (object instanceof ResizableObject) {
-            this.resizableObjects.push(object);
-        }
     }
 
     onResize(): void {
-        for (const object of this.resizableObjects) {
-            object.onResize();
+        if (!this.initialized) {
+            return;
         }
+
+        for (const object of this.objects) {
+            object.onResize?.();
+        }
+    }
+
+    private async addSceneObjects(object: SceneObject) {
+        const sceneObjects = await object.sceneObjects?.();
+        if (sceneObjects == null) {
+            return;
+        }
+
+        this.scene.add(...sceneObjects);
     }
 }

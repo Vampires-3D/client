@@ -1,11 +1,11 @@
 import {PerspectiveCamera} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-import {ResizableObject} from './ResizableObject';
 import {Container, Service} from 'typedi';
 import {CAMERA, RENDERER} from '../services';
+import {SceneObject} from './SceneObject';
 
 @Service(CAMERA)
-export default class Camera extends ResizableObject {
+export default class Camera extends SceneObject {
     public camera!: PerspectiveCamera;
     private controls!: OrbitControls;
 

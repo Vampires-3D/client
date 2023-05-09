@@ -1,9 +1,6 @@
 import 'reflect-metadata';
-import './engine/Scene';
-import './engine/Camera';
-import './engine/Renderer';
-import './engine/Stats';
-import './game/MainScene';
+import './engine';
+import './game';
 
 import {Container} from 'typedi';
 import {CONTAINER} from './services';
