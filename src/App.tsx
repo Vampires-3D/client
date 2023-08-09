@@ -5,7 +5,7 @@ import {Menu} from './components/Menu.tsx';
 
 function App() {
   return (
-    <div style={{position: 'relative'}}>
+    <div className="position-relative">
       <Three/>
       <Layout>
         <Menu/>

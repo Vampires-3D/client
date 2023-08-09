@@ -4,6 +4,7 @@ export function Info() {
   const percentage = 60;
   const name = 'mstfygci';
   const level = 13;
+
   return (
     <Button variant="light" className="mt-3 d-flex">
       <i className="bi bi-person-circle me-3 h2"></i>
@@ -17,5 +18,5 @@ export function Info() {
         {level}
       </i>
     </Button>
-  )
+  );
 }
