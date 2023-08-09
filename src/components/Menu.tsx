@@ -1,22 +1,26 @@
 import {Button, ButtonToolbar} from 'react-bootstrap';
 
 type ButtonType = {
+  key: string,
   title: string,
   backgroundColor: string,
   color: string
-}[]
+}
 
 export function Menu() {
-  const buttons: ButtonType = [
+  const buttons: ButtonType[] = [
     {
+      key: 'play',
       title: 'PLAY',
       backgroundColor: 'gainsboro',
       color: 'black'
     }, {
+      key: 'inventory',
       title: 'INVENTORY',
       backgroundColor: 'gainsboro',
       color: 'black'
     }, {
+      key: 'roles',
       title: 'ROLES',
       backgroundColor: 'gainsboro',
       color: 'black'
@@ -28,8 +32,8 @@ export function Menu() {
       {buttons.map((item, index) => {
         return (
           <div className={`row justify-content-center ${index != 0 && ' mt-2'}`}>
-            <Button variant="outline-dark"
-                    style={{backgroundColor: item.backgroundColor, width: 'auto'}}>{item.title}</Button>
+            <Button className={'w-auto'} variant="outline-dark"
+                    style={{backgroundColor: item.backgroundColor}}>{item.title}</Button>
           </div>
         )
       })}
