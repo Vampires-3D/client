@@ -1,1 +1,1 @@
-import './MainScene';
+import "./MainScene";
